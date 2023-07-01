@@ -1,3 +1,4 @@
+import os
 from twilio.rest import Client
 import requests
 from bs4 import BeautifulSoup
@@ -19,7 +20,9 @@ title = s.title.string
 print(title)
 
 # pritvate Twilio acct # don't share
-account_sid = "AC46cc7d05ca5e70df445c8ce1115a7ff9"
+account_sid = os.environ.get('account_sid')
+auth_token = os.environ.get('auth_token')
+
 auth_token = "8f8543d1b249f4e4f58f1c324451e650"
 
 client = Client(account_sid, auth_token)
