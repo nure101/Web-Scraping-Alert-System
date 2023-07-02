@@ -1,8 +1,22 @@
-
 import requests
 from bs4 import BeautifulSoup
+import os
+from twilio.rest import Client
 
 
+
+
+
+##### WILL RUN AN ERROR IF THERE ARE NO NEWS AND IT IS RUN ####
+
+
+
+
+
+account_sid = os.environ.get('account_sid')
+auth_token = os.environ.get('auth_token')
+my_number = os.environ.get('my_number')
+twilio_number = os.environ.get('my_twilio_number')
 
 
 url = "https://kstp.com/kstp-news/local-news/"
@@ -10,7 +24,7 @@ html = requests.get(url)
 
 s = BeautifulSoup(html.content, 'html.parser')
 #print(s.title.string)
-words_to_watch = ["emergency","gunshots","severe","fire","murder","tornado","wreckage","crash","killed","injured","dies","shooting","hurt","dead","drunk","crash","terrorized","severe"]
+words_to_watch = ["police","emergency","gunshots","severe","fire","murder","tornado","wreckage","crash","killed","injured","dies","shooting","hurt","dead","drunk","crash","terrorized","severe"]
 
 
 new_headlines_for_the_day = []
@@ -56,6 +70,20 @@ if check_news() == False:
 new_headlines_for_the_day = []
 
 
+client = Client(account_sid, auth_token)
+
+if new_new == " ":
+    pass
+else:
+    client.messages.create(
+            to = my_number,
+            from_ = twilio_number,
+        # max char Twilio can send: 72
+            body = new_new[0:72]
+        )
+
+
+#for writing to files: 
 # with open("work.txt", 'w') as f:
 #     for i in new_headlines_for_the_day:
 #         f.write(i)
