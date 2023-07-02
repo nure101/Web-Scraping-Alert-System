@@ -24,14 +24,13 @@ account_sid = os.environ.get('account_sid')
 auth_token = os.environ.get('auth_token')
 
 #keep private 
-auth_token = "8f8543d1b249f4e4f58f1c324451e650"
 
 client = Client(account_sid, auth_token)
 
 client.messages.create(
         #keep private 
-        to = "+16124537222",
-        from_ = "+18339413795",
+        to = "+",
+        from_ = "+",
     # max char Twilio can send: 72
         body = title
     )
