@@ -19,14 +19,11 @@ s = BeautifulSoup(html.content, 'html.parser')
 title = s.title.string
 print(title)
 
-# pritvate Twilio acct # don't share
+# pritvate Twilio acct and os environment var 
 account_sid = os.environ.get('account_sid')
 auth_token = os.environ.get('auth_token')
 my_number = os.environ.get('my_number')
 twilio_number = os.environ.get('my_twilio_number')
-
-
-auth_token = "8f8543d1b249f4e4f58f1c324451e650"
 
 client = Client(account_sid, auth_token)
 
@@ -34,5 +31,5 @@ client.messages.create(
         to = my_number,
         from_ = twilio_number,
     # max char Twilio can send: 72
-        body = title
+        body = title[0:72]
     )
