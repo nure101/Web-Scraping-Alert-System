@@ -37,11 +37,10 @@ def check_news():
       
         for r in w:
             r = r.strip()
-            r = "wellll"
             new_headlines_for_the_day.append(r)
             #print ("Looking: "+r)
             if past_news(r):
-                return True
+                pass
             else:
                 global new_new; new_new = r
                 return False
