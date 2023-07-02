@@ -4,15 +4,6 @@ import os
 from twilio.rest import Client
 
 
-
-
-
-##### WILL RUN AN ERROR IF THERE ARE NO NEWS AND IT IS RUN ####
-
-
-
-
-
 account_sid = os.environ.get('account_sid')
 auth_token = os.environ.get('auth_token')
 my_number = os.environ.get('my_number')
