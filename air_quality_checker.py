@@ -16,5 +16,5 @@ data = s.find(id="aqiwgtvalue")
 status = s.find(id="aqiwgtinfo")
 
 
-with open('/Users/nuremo/Desktop/projects/Air_Quality_Tracker/air_record.txt', 'a') as f:
+with open('air_record.txt', 'a') as f:
     f.write(f"Air Quality {status.text}: {data.text} {str(datetime.datetime.now())} \n")
