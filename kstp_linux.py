@@ -11,14 +11,15 @@ import os
 from twilio.rest import Client
 
 
-account_sid = 'ACb96b77d5793039993a54356aa64e5f99' #os.environ.get('account_sid')
-auth_token = 'eb242d0260059e264979220901a31901' #os.environ.get('auth_token')
-my_number = +16124537222 #os.environ.get('my_number')
-twilio_number = +18666559640 #os.environ.get('my_twilio_number')
+# don't use enviornmnet vars here
+account_sid = 'account_sid_num' 
+auth_token = 'auth_t'
+my_number = +your_number 
+twilio_number = +Twilio number 
 
 client = Client(account_sid, auth_token)
 
-# with open("/home/nure/Downloads/idk.txt", 'a') as f:
+# with open("/full/path/to/file", 'a') as f:
 #     f.write("This is so slow" + '\n')
 
 # client.messages.create(
@@ -39,7 +40,7 @@ words_to_watch = ["police","emergency","gunshots","severe","fire","murder","torn
 new_headlines_for_the_day = []
 
 def past_news(some_text):
-    with open("/home/nure/Downloads/work.txt", 'r') as f:
+    with open("full/path/to/file", 'r') as f:
         reading = f.readlines()
         for i in reading:
             #print (some_text.strip() + "   " + i)
@@ -71,7 +72,7 @@ def check_news():
 
 if check_news() == False:
     print ("adding to file: " + new_new)
-    with open("/home/nure/Downloads/work.txt", 'a') as f:
+    with open("/full/path/to/file, 'a') as f:
             f.write(new_new) 
             f.write('\n')
 
@@ -91,7 +92,7 @@ else:
             body = new_new#[0:72]
         )
 
-# with open("/home/nure/Downloads/please.txt", 'a') as f:
+# with open("/full/path/to/file", 'a') as f:
 #         f.write(new_new) 
 #         f.write('\n')
 
