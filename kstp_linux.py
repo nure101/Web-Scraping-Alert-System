@@ -1,0 +1,106 @@
+# client.messages.create(
+#         to = my_number,
+#         from_ = twilio_number,
+#     # max char Twilio can send: 72
+#         body = new_new#[0:72]
+#     )
+
+import requests
+from bs4 import BeautifulSoup
+import os
+from twilio.rest import Client
+
+
+account_sid = 'ACb96b77d5793039993a54356aa64e5f99' #os.environ.get('account_sid')
+auth_token = 'eb242d0260059e264979220901a31901' #os.environ.get('auth_token')
+my_number = +16124537222 #os.environ.get('my_number')
+twilio_number = +18666559640 #os.environ.get('my_twilio_number')
+
+client = Client(account_sid, auth_token)
+
+# with open("/home/nure/Downloads/idk.txt", 'a') as f:
+#     f.write("This is so slow" + '\n')
+
+# client.messages.create(
+#         to = my_number,
+#         from_ = twilio_number,
+#     # max char Twilio can send: 72
+#         body = "Testing"#[0:72]
+#     )
+
+url = "https://kstp.com/kstp-news/local-news/"
+html = requests.get(url)
+
+s = BeautifulSoup(html.content, 'html.parser')
+#print(s.title.string)
+words_to_watch = ["police","emergency","gunshots","severe","fire","murder","tornado","wreckage","crash","killed","injured","dies","shooting","hurt","dead","drunk","crash","terrorized","severe"]
+
+
+new_headlines_for_the_day = []
+
+def past_news(some_text):
+    with open("/home/nure/Downloads/work.txt", 'r') as f:
+        reading = f.readlines()
+        for i in reading:
+            #print (some_text.strip() + "   " + i)
+            if str(some_text).strip() == i.strip():
+                return True
+        return False
+
+job_title = s.find_all(class_="col-12 col-lg-9 hbi2020-archive-block")
+
+new_new = " "
+def check_news():
+    for i in job_title:
+        i = i.text
+        #print (i)
+        w = i.split('\n')
+        w = ' '.join(w)
+        w = w.split('       ')
+      
+        for r in w:
+            r = r.strip()
+            new_headlines_for_the_day.append(r)
+            print ("Looking: "+r)
+            if past_news(r):
+                pass
+            else:
+                global new_new; new_new = r
+                return False
+
+
+if check_news() == False:
+    print ("adding to file: " + new_new)
+    with open("/home/nure/Downloads/work.txt", 'a') as f:
+            f.write(new_new) 
+            f.write('\n')
+
+
+new_headlines_for_the_day = []
+
+
+client = Client(account_sid, auth_token)
+
+if new_new == " ":
+    pass
+else:
+    client.messages.create(
+            to = my_number,
+            from_ = twilio_number,
+        # max char Twilio can send: 72
+            body = new_new#[0:72]
+        )
+
+# with open("/home/nure/Downloads/please.txt", 'a') as f:
+#         f.write(new_new) 
+#         f.write('\n')
+
+#for writing to files: 
+# check_news()
+# with open("work.txt", 'w') as f:
+#     for i in new_headlines_for_the_day:
+#         f.write(i)
+#         print(i)
+#         f.write('\n')
+
+
