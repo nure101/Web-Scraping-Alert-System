@@ -1,9 +1,4 @@
-# client.messages.create(
-#         to = my_number,
-#         from_ = twilio_number,
-#     # max char Twilio can send: 72
-#         body = new_new#[0:72]
-#     )
+#Works on Mac/Linux systems using crontabs 
 
 import requests
 from bs4 import BeautifulSoup
